@@ -1,0 +1,18 @@
+SOLUCIÓN AL ERROR DE SUBIDA (CORS)
+----------------------------------
+
+El error que estás viendo ocurre porque Google Cloud bloquea las subidas desde 'localhost' por seguridad. Para arreglarlo, sigue estos pasos:
+
+1. Abre una terminal (PowerShell o CMD).
+2. Asegúrate de tener instalado 'gsutil'. Si no lo tienes, la forma más rápida es:
+   - Ir a la consola de Google Cloud: https://console.cloud.google.com/
+   - Activar el "Cloud Shell" (el icono de terminal arriba a la derecha >_ ).
+3. En esa terminal (la de la web o la tuya), ejecuta este comando:
+
+   echo '[{"origin": ["*"],"method": ["GET", "POST", "PUT", "DELETE", "HEAD"],"responseHeader": ["Content-Type"],"maxAgeSeconds": 3600}]' > cors.json
+
+4. Luego ejecuta este comando para aplicar la configuración a tu bucket:
+
+   gsutil cors set cors.json gs://masturbanda-league-cup.firebasestorage.app
+
+¡Y listo! Una vez hecho esto, la subida de fotos funcionará perfectamente desde tu ordenador local.
